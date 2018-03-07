@@ -1,4 +1,4 @@
-package com.put.chatterbox
+package com.put.Chatterbox
 
 import org.junit.Test
 

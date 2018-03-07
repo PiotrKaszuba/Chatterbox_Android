@@ -1,4 +1,4 @@
-package com.put.chatterbox
+package com.put.Chatterbox
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

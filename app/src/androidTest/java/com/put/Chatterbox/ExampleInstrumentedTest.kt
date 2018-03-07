@@ -1,4 +1,4 @@
-package com.put.chatterbox
+package com.put.Chatterbox
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
