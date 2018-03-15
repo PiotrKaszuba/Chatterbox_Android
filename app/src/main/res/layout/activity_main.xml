@@ -11,10 +11,10 @@
 
     <Button
         android:id="@+id/logInButton"
-        android:layout_width="160dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="32dp"
-        android:background="#f9e721"
+        android:layout_width="170dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#f9e721"
         android:text="LOG IN"
         android:textColor="#1c2f4d"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,10 +23,10 @@
 
     <Button
         android:id="@+id/signUpButton"
-        android:layout_width="160dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
-        android:background="#f9e721"
+        android:layout_width="170dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#f9e721"
         android:text="SIGN UP"
         android:textColor="#1c2f4d"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
         android:layout_height="140dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
