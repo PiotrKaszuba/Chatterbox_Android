@@ -43,7 +43,7 @@ public class SignUp extends AppCompatActivity {
         if(isValidUsername(usernameEdit.getText().toString())){
             if(isValidEmail(emailEdit.getText().toString())) {
                 if(checkPasswords(passwordEdit.getText().toString(), confirmPasswordEdit.getText().toString())) {
-                    Long timestamp = System.currentTimeMillis()/1000;
+                    Long timestamp = System.currentTimeMillis();
                     SignUpController.signUp(usernameEdit.getText().toString(),passwordEdit.getText().toString(),emailEdit.getText().toString(),timestamp,this);
                 } else {
                     Toast.makeText(this, "The passwords are diffrent", Toast.LENGTH_SHORT).show();
@@ -58,6 +58,7 @@ public class SignUp extends AppCompatActivity {
 
     private boolean checkPasswords(String pass, String confirmPass)
     {
+        if(pass.length()<6) return false;
         if(pass.equals(confirmPass)) return true;
         else return false;
     }

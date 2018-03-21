@@ -25,7 +25,7 @@ public class SignUpController {
     private static void writeNewUser(String userId, String userName, String email, Long timestamp, DatabaseReference mDatabase) {
         User user = new User(userName, email, timestamp);
 
-        mDatabase.child("users").child(userId).setValue(user);
+        mDatabase.child("Users").child(userId).setValue(user);
     }
 
     public static void signUp(final String userName,final String password,final String email,final Long timestamp, final SignUp instance){
