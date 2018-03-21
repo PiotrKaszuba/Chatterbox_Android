@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.put.Chatterbox.Model.User;
-import com.put.Chatterbox.SignUp;
 
 import static android.content.ContentValues.TAG;
 
@@ -44,7 +43,8 @@ public class SignUpController {
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             writeNewUser(user.getUid(), userName, email, timestamp, mDatabase);
-
+                            Toast.makeText(instance, "New user registered.",
+                                    Toast.LENGTH_SHORT).show();
 
                         } else {
                             // If sign in fails, display a message to the user.

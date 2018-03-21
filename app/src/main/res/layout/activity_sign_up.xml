@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1c2f4d"
-    tools:context="com.put.Chatterbox.SignUp">
+    tools:context="com.put.Chatterbox.Controller.SignUp">
 
     <Button
         android:id="@+id/singUpButton"
