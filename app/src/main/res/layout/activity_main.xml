@@ -27,6 +27,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="#f9e721"
+        android:onClick="signUp"
         android:text="SIGN UP"
         android:textColor="#1c2f4d"
         app:layout_constraintEnd_toEndOf="parent"
