@@ -32,22 +32,26 @@ public class UserListController {
 
 
 
-    public static void readFromDatabase() {
+    public static void readFromDatabase(final UserList instance, User user) {
+
+        final String activeUser = user.username;
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference usersdRef = rootRef.child("Users");
         usersdRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                List<String> usernamesArrayList = new ArrayList<String>();
+                ArrayList<String> usernamesArrayList = new ArrayList<String>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     System.out.println(ds.toString());
 
                     String username = (String) ds.child("username").getValue();
                     System.out.println("username: " + username);
-                    usernamesArrayList.add(username);
+                   if(!activeUser.equals(username)) usernamesArrayList.add(username);
                     System.out.println("arr size in for: " + usernamesArrayList.size());
                 }
+
+                instance.updateUserList(usernamesArrayList);
             }
 
             @Override
