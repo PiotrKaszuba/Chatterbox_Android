@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1c2f4d"
-    tools:context="com.put.Chatterbox.UserList">
+    tools:context="com.put.Chatterbox.Controller.UserList">
 
     <TextView
         android:id="@+id/logoutButton"
@@ -47,4 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+
 </android.support.constraint.ConstraintLayout>
