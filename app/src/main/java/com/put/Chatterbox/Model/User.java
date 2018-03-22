@@ -1,5 +1,8 @@
 package com.put.Chatterbox.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
@@ -8,7 +11,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 
 @IgnoreExtraProperties
-public class User {
+public class User implements Parcelable {
 
     public String username;
     public String email;
@@ -24,5 +27,32 @@ public class User {
         this.timestamp = timestamp;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeString(username);
+        out.writeString(email);
+        out.writeLong(timestamp);
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    private User(Parcel in) {
+        username = in.readString();
+        email = in.readString();
+        timestamp = in.readLong();
+    }
 }
 

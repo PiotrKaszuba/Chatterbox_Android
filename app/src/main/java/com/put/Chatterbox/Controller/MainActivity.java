@@ -7,27 +7,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.put.Chatterbox.Controller.SignUp;
+import com.google.firebase.auth.FirebaseUser;
 import com.put.Chatterbox.R;
-
-import com.put.Chatterbox.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     Button signUpButton;
-    Button logInButton;
+    Button signInButton;
     EditText emailEdit;
     EditText passwordEdit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         signUpButton = (Button) findViewById(R.id.signUpButton);
-        logInButton = (Button) findViewById(R.id.logInButton);
+        signInButton = (Button) findViewById(R.id.logInButton);
         emailEdit = (EditText) findViewById(R.id.emailEdit);
         passwordEdit = (EditText) findViewById(R.id.passwordEdit);
     }
@@ -38,9 +32,17 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    protected void logIn(View view){
+    protected void signIn(View view)
+    {
 
+        MainActivityController.signIn(emailEdit.getText().toString(), passwordEdit.getText().toString(), this);
+
+
+
+
+        //
 
     }
+
 
 }
