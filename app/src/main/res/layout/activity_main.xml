@@ -15,7 +15,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#f9e721"
-        android:onClick="logIn"
+        android:onClick="signIn"
         android:text="LOG IN"
         android:textColor="#1c2f4d"
         app:layout_constraintEnd_toEndOf="parent"

@@ -34,11 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void signIn(View view)
     {
-
         MainActivityController.signIn(emailEdit.getText().toString(), passwordEdit.getText().toString(), this);
-
-
-
 
         //
 

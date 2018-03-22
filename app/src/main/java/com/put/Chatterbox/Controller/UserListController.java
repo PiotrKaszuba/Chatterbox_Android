@@ -32,9 +32,9 @@ public class UserListController {
 
 
 
-    public static void readFromDatabase(final UserList instance, User user) {
+    public static void readFromDatabase(final UserList instance) {
 
-        final String activeUser = user.username;
+        final String activeUser = instance.user.username;
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference usersdRef = rootRef.child("Users");
