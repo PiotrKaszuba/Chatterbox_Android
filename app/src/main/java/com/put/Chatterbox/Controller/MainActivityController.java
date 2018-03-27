@@ -18,6 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.put.Chatterbox.Model.User;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -30,7 +34,7 @@ public class MainActivityController {
 
     public static void signIn(String email, String password, final MainActivity instance){
 
-        User user = null;
+      // User user = new User();
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
@@ -38,12 +42,27 @@ public class MainActivityController {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
-                User user = dataSnapshot.getValue(User.class);
+                
+                String userKey = dataSnapshot.getKey();
 
-                Intent myIntent = new Intent(instance, UserList.class);
-                myIntent.putExtra("user", user);
-                instance.startActivity(myIntent);
+                DatabaseReference usersRef =  FirebaseDatabase.getInstance().getReference().child("Users").child(userKey);
+                ValueEventListener eventListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String email = dataSnapshot.child("email").getValue(String.class);
+                        String username = dataSnapshot.child("username").getValue(String.class);
+                        Long timestamp = dataSnapshot.child("timestamp").getValue(Long.class);
 
+                        User user = new User(username,email,timestamp);
+                        Intent myIntent = new Intent(instance, UserList.class);
+                        myIntent.putExtra("user", user);
+                        instance.startActivity(myIntent);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                };
+                usersRef.addListenerForSingleValueEvent(eventListener);
 
             }
 
@@ -53,9 +72,8 @@ public class MainActivityController {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // ...
             }
+
         };
-
-
 
 
         mAuth.signInWithEmailAndPassword(email, password)
@@ -67,8 +85,7 @@ public class MainActivityController {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-
-                            final DatabaseReference ref = FirebaseDatabase.getInstance().getReference(user.getUid());
+                            final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid());
                             ref.addListenerForSingleValueEvent(postListener);
                             Toast.makeText(instance, "Log in successful.",
                                     Toast.LENGTH_SHORT).show();
