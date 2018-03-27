@@ -13,6 +13,7 @@
         android:layout_height="22dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:onClick="SignOut"
         android:text="Logout"
         android:textColor="#979797"
         android:textSize="16sp"
