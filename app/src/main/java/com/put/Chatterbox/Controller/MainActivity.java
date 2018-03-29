@@ -1,6 +1,8 @@
 package com.put.Chatterbox.Controller;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,6 +41,30 @@ public class MainActivity extends AppCompatActivity {
         //
 
     }
+    protected void forgotPassword(View view){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
+        alert.setTitle("Title");
+        alert.setMessage("Message");
+
+// Set an EditText view to get user input
+        final EditText input = new EditText(this);
+        alert.setView(input);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                // Do something with value!
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+
+        alert.show();
+    }
 
 }
