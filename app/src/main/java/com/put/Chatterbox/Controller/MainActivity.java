@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.put.Chatterbox.Ad.AdUtils;
 import com.put.Chatterbox.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         signInButton = (Button) findViewById(R.id.logInButton);
         emailEdit = (EditText) findViewById(R.id.emailEdit);
         passwordEdit = (EditText) findViewById(R.id.passwordEdit);
+        AdUtils.InitializeAds(this);
+        AdUtils.addTestBanner(this);
+        AdUtils.loadTestBanner(this);
     }
 
     protected void signUp(View view)
