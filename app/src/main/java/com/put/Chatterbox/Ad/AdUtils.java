@@ -25,13 +25,13 @@ public class AdUtils {
     public static void addTestBanner(Context context){
         AdView adView = new AdView(context);
         adView.setAdSize(AdSize.BANNER);
-        adView.setId(Integer.parseInt("adView"));
+        adView.setId(Integer.parseInt("1245"));
         adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111"); // test app id
         // TODO: Add adView to your view hierarchy.
     }
 
     public static void loadTestBanner(Activity context){
-        AdView mAdView = context.findViewById(Integer.parseInt("adView"));
+        AdView mAdView = context.findViewById(Integer.parseInt("1245"));
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
