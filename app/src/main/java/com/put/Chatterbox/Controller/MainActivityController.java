@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.put.Chatterbox.Controller.Lobby.ChannelLobby;
 import com.put.Chatterbox.Model.User;
 
 import java.util.Arrays;
@@ -54,7 +55,7 @@ public class MainActivityController {
                         Long timestamp = dataSnapshot.child("timestamp").getValue(Long.class);
 
                         User user = new User(username,email,timestamp);
-                        Intent myIntent = new Intent(instance, UserList.class);
+                        Intent myIntent = new Intent(instance, ChannelLobby.class);
                         myIntent.putExtra("user", user);
                         instance.startActivity(myIntent);
                     }

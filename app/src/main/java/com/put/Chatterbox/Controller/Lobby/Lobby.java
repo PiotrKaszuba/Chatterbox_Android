@@ -5,15 +5,19 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 
+import com.put.Chatterbox.Model.Channel;
+
+import java.util.List;
+
 /**
  * Created by Piotr on 2018-04-19.
  */
 
 public interface Lobby {
 
-    public void loadView(Adapter chatList, AdapterView view);
-    public Adapter fetchFromCache();
-    public Adapter fetchFromDatabase();
-    public void onItemClick(AdapterView parent, View v, int position, long id);
-    public void refresh(AdapterView view);
+    public void loadView(ListAdapter chatList, AdapterView view);
+    public void fetchFromCache();
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l);
+    public void refresh();
+    void connectDatabase();
 }
