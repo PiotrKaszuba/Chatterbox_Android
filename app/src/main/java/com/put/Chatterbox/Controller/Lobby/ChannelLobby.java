@@ -1,14 +1,10 @@
 package com.put.Chatterbox.Controller.Lobby;
 
-import android.content.Context;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ListAdapter;
@@ -19,7 +15,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.put.Chatterbox.Model.Channel;
 import com.put.Chatterbox.R;
 
@@ -35,7 +30,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
     public ChannelLobby(){
         channelList = new ArrayList<>() ;
         channelLobby = this;
-        adapter = new ChatAdapter(this, channelList);
+        adapter = new LobbyAdapter(this, channelList);
     }
 
     @Override

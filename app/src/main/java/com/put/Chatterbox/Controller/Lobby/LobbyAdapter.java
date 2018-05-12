@@ -15,12 +15,12 @@ import java.util.List;
  * Created by Piotr on 2018-05-09.
  */
 
-public class ChatAdapter extends BaseAdapter {
+public class LobbyAdapter extends BaseAdapter {
     private final Context mContext;
     private final List<Channel> channels;
 
     // 1
-    public ChatAdapter(Context context, List channels) {
+    public LobbyAdapter(Context context, List channels) {
         this.mContext = context;
         this.channels = channels;
     }
