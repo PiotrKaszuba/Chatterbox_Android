@@ -1,10 +1,14 @@
 package com.put.Chatterbox.Controller.Lobby;
 
 import android.content.Context;
+import android.content.Intent;
 import android.nfc.Tag;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -20,7 +24,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.put.Chatterbox.Controller.UserList;
 import com.put.Chatterbox.Model.Channel;
+import com.put.Chatterbox.Model.User;
 import com.put.Chatterbox.R;
 
 import java.util.ArrayList;
@@ -32,6 +38,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
     ListAdapter adapter;
     GridView kafelki;
     final ChannelLobby channelLobby;
+    User user;
     public ChannelLobby(){
         channelList = new ArrayList<>() ;
         channelLobby = this;
@@ -44,6 +51,34 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.channellobby);
         //ustaw ID statyczne w gridview kafelki
+        Intent intent = getIntent();
+        user = intent.getParcelableExtra("user");
+        BottomNavigationView bnv = this.findViewById(R.id.bottom_navigation);
+        final Context instance = this;
+        bnv.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent myIntent = null;
+                switch(item.getItemId()){
+
+                    case R.id.menuUsers:
+                         myIntent = new Intent(instance, UserList.class);
+                        myIntent.putExtra("user", user);
+                        instance.startActivity(myIntent);
+                        break;
+                    case R.id.menuPrivate:
+                        myIntent = new Intent(instance, UserList.class);
+                        myIntent.putExtra("user", user);
+                        instance.startActivity(myIntent);
+                        break;
+
+
+
+                }
+                return true;
+            }
+        });
+
         kafelki = findViewById(R.id.ChannelGrid);
 
         kafelki.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -55,6 +90,8 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
         });
         this.connectDatabase();
         this.loadView(adapter, kafelki);
+
+
 
     }
 
@@ -81,6 +118,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Channel c = dataSnapshot.getValue(Channel.class);
+
                 channelList.add(c);
                 refresh();
                 Log.i("FireInfo: ", "Added channel name: "+ c.channelName);
