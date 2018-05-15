@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.put.Chatterbox.Model.ChatBubble;
 import com.put.Chatterbox.Model.Message;
+import com.put.Chatterbox.Model.User;
 import com.put.Chatterbox.R;
 
 import java.util.ArrayList;
@@ -47,11 +48,15 @@ public class ChatActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                System.out.println("MESSAGES");
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
                     System.out.println(ds.toString());
 
-                    chatBubbles.add(new ChatBubble((String) ds.child("content").getValue(), (String) ds.child("senderId").getValue()));
+                    //chatBubbles.add(new ChatBubble((String) ds.child("content").getValue(), (String) ds.child("senderId").getValue()));
+                    ChatBubble chatBubble = new ChatBubble("fedec","1");
+                    chatBubbles.add(chatBubble);
+
 
                     adapter.notifyDataSetChanged();
 
@@ -77,6 +82,8 @@ public class ChatActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.msg_type);
 
         //set ListView adapter first
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String userId = user.getUid();
         adapter = new ChatAdapter(this, R.layout.chat_layout_left, chatBubbles, userId);
         listView.setAdapter(adapter);
 

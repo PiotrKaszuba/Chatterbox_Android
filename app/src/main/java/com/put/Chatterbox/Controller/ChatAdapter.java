@@ -36,7 +36,13 @@ public class ChatAdapter extends ArrayAdapter<ChatBubble> {
 
         int layoutResource = 0; // determined by view type
         ChatBubble chatBubble = getItem(position);
+        System.out.println("CHANNELS" + getItem(0).toString());
+
         int viewType = getItemViewType(position);
+
+
+        int a=0;
+
 
         if (userId.equals(chatBubble.getSenderId())) {
             layoutResource = R.layout.chat_layout_left;
@@ -56,6 +62,13 @@ public class ChatAdapter extends ArrayAdapter<ChatBubble> {
         holder.messageTextView.setText(chatBubble.getContent());
 
         return convertView;
+    }
+
+    @Override
+    public ChatBubble getItem(int position){
+        ChatBubble chatBubble;
+        chatBubble = messages.get(position);
+        return chatBubble;
     }
 
     @Override

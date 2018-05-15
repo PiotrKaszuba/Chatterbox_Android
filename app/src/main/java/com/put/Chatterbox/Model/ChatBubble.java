@@ -8,10 +8,14 @@ public class ChatBubble {
 
     private String content;
     private String senderId;
+    private Long timestamp;
 
-    public ChatBubble(String content, String senderId) {
+    public ChatBubble() {}
+
+    public ChatBubble(String content, String senderId ) {
         this.content = content;
         this.senderId = senderId;
+
     }
 
     public String getContent() {
@@ -20,5 +24,21 @@ public class ChatBubble {
 
     public String getSenderId() {
         return senderId;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }
