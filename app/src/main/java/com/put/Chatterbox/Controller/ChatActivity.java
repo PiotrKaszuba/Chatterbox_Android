@@ -42,27 +42,27 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         chatBubbles = new ArrayList<>();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    System.out.println(ds.toString());
-
-                    chatBubbles.add(new ChatBubble((String) ds.child("content").getValue(), (String) ds.child("senderId").getValue()));
-
-                    adapter.notifyDataSetChanged();
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//        databaseReference.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1");
+//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+//                    System.out.println(ds.toString());
+//
+//                    chatBubbles.add(new ChatBubble((String) ds.child("content").getValue(), (String) ds.child("senderId").getValue()));
+//
+//                    adapter.notifyDataSetChanged();
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
         /*FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -70,6 +70,10 @@ public class ChatActivity extends AppCompatActivity {
             String uid = user.getUid();
             userId = uid; // brak danych = crash
         }*/
+        for(int i=0;i<10;i++)
+        {
+            chatBubbles.add(new ChatBubble("Sample Text Message xD " + i,"xd"));
+        }
 
 
         listView = (ListView) findViewById(R.id.list_msg);
@@ -89,9 +93,11 @@ public class ChatActivity extends AppCompatActivity {
                 } else {
                     //add message to list
 
+                    chatBubbles.add(new ChatBubble(editText.getText().toString(),"xd"));
+                    adapter.notifyDataSetChanged();
                     // [??] Wysylanie wiadomosci do bazy
-                    writeNewMessage(userId, editText.getText().toString(), System.currentTimeMillis(),
-                            FirebaseDatabase.getInstance().getReference());
+//                    writeNewMessage(userId, editText.getText().toString(), System.currentTimeMillis(),
+//                            FirebaseDatabase.getInstance().getReference());
 
 
                     editText.setText("");

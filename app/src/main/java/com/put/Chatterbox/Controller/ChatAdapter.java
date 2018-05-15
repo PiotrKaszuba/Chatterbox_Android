@@ -71,6 +71,8 @@ public class ChatAdapter extends ArrayAdapter<ChatBubble> {
         return position % 2;
     }
 
+
+
     private class ViewHolder {
         private TextView messageTextView;
 
