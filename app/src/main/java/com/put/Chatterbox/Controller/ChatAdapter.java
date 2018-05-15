@@ -20,9 +20,9 @@ public class ChatAdapter extends ArrayAdapter<ChatBubble> {
 
     private Activity activity;
     private List<ChatBubble> messages;
-    private long userId;
+    private String userId;
 
-    public ChatAdapter(Activity context, int resource, List<ChatBubble> objects, long userId) {
+    public ChatAdapter(Activity context, int resource, List<ChatBubble> objects, String userId) {
         super(context, resource, objects);
         this.activity = context;
         this.messages = objects;
@@ -38,7 +38,7 @@ public class ChatAdapter extends ArrayAdapter<ChatBubble> {
         ChatBubble chatBubble = getItem(position);
         int viewType = getItemViewType(position);
 
-        if (userId == chatBubble.getSenderId()) {
+        if (userId.equals(chatBubble.getSenderId())) {
             layoutResource = R.layout.chat_layout_left;
         } else {
             layoutResource = R.layout.chat_layout_right;
