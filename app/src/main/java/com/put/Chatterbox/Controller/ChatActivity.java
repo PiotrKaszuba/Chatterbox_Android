@@ -41,6 +41,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        userId = "xd2";
         chatBubbles = new ArrayList<>();
 //        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 //        databaseReference.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1");
@@ -93,7 +94,7 @@ public class ChatActivity extends AppCompatActivity {
                 } else {
                     //add message to list
 
-                    chatBubbles.add(new ChatBubble(editText.getText().toString(),"xd"));
+                    chatBubbles.add(new ChatBubble(editText.getText().toString(),userId));
                     adapter.notifyDataSetChanged();
                     // [??] Wysylanie wiadomosci do bazy
 //                    writeNewMessage(userId, editText.getText().toString(), System.currentTimeMillis(),
