@@ -16,6 +16,8 @@
         android:numColumns="auto_fit"
         android:stretchMode="spacingWidthUniform"
         android:verticalSpacing="24dp"
+        android:background="#1c2f4d"
+        android:paddingTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -1,6 +1,9 @@
 package com.put.Chatterbox.Controller.Lobby;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,6 +13,8 @@ import com.put.Chatterbox.Model.Channel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Piotr on 2018-05-09.
@@ -47,7 +52,17 @@ public class LobbyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView dummyTextView = new TextView(mContext);
+        Random r= new Random();
+
+        int randomColor = Color.rgb(r.nextInt(256),r.nextInt(255),r.nextInt(256));
+        dummyTextView.setBackgroundColor(randomColor);
+        //dummyTextView.setBackground();
+
+        dummyTextView.setPadding(10,10,10,10);
+        dummyTextView.setGravity(Gravity.CENTER);
+
         dummyTextView.setText(channels.get(position).channelName);
+        dummyTextView.setHeight(150);
 
         return dummyTextView;
     }
