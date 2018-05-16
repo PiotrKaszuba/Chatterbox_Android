@@ -4,6 +4,7 @@ package com.put.Chatterbox.Controller;
  * Created by A on 15.05.2018.
  */
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,11 +42,12 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        Intent intent = getIntent();
+        chatId = intent.getParcelableExtra("channelId");
 
-        //userId = "xd2";
         chatBubbles = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference channelReference = databaseReference.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1");
+        DatabaseReference channelReference = databaseReference.child("ChannelMessages").child(chatId);
 
        channelReference.orderByChild("timestamp").addChildEventListener(new ChildEventListener() {
            @Override
@@ -145,12 +147,12 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    private static void writeNewMessage(String senderId, String content, Long timestamp, DatabaseReference mDatabase) {
+    private void writeNewMessage(String senderId, String content, Long timestamp, DatabaseReference mDatabase) {
 
         Message message = new Message(content, senderId, timestamp);
 
 
-        mDatabase.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1").push().setValue(message);
+        mDatabase.child("ChannelMessages").child(chatId).push().setValue(message);
     }
 }
 

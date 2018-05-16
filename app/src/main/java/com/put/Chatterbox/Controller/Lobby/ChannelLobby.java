@@ -179,6 +179,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
         /*DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().;
         for(DataSnapshot ds : databaseReference.("Channels"))*/
         Intent chatIntent = new Intent(this, ChatActivity.class);
+        chatIntent.putExtra("channelId", channelList.get(i).getId());
         startActivity(chatIntent);
 
 
