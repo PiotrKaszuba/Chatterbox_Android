@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.put.Chatterbox.Controller.ChatActivity;
 import com.put.Chatterbox.Controller.UserList;
 import com.put.Chatterbox.Model.Channel;
 import com.put.Chatterbox.Model.User;
@@ -171,6 +172,12 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
         String t = channelList.get(i).channelName;
         Toast.makeText(channelLobby, "Chose chat with name: " + channelList.get(i).channelName,
                 Toast.LENGTH_SHORT).show();
+
+        /*DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().;
+        for(DataSnapshot ds : databaseReference.("Channels"))*/
+        Intent chatIntent = new Intent(this, ChatActivity.class);
+        startActivity(chatIntent);
+
 
     }
     @Override
