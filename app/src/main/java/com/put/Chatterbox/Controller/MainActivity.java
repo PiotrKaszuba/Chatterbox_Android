@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         signInButton = (Button) findViewById(R.id.logInButton);
         emailEdit = (EditText) findViewById(R.id.emailEdit);
         passwordEdit = (EditText) findViewById(R.id.passwordEdit);
+        ChatController.messageToWebserv("Hey, how are u 2day?");
     }
 
     protected void signUp(View view)

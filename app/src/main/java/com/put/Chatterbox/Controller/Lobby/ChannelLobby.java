@@ -105,13 +105,17 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
 
 
     public void connectDatabase(){
+        //przechwytujemy instację danych i ustawiamy miejsce czytania na kanały "Channels"
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("Channels");
 
-        // Attach a listener to read the data at our posts reference
 
+        //dodajemy listener zmian potomków drzewa o korzeniu w punkcie kanały "Channels" i sortujemy po ostatniej wiadomości
         ref.orderByChild("lastMessageTimestamp").addChildEventListener(new ChildEventListener() {
 
+
+            //przy dodaniu węzła (oraz po ustawieniu listenera jedno wywołanie na każdy już istniejący węzeł)
+            //dodajemy węzeł do list kanałów i odświeżamy widok
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Channel c = dataSnapshot.getValue(Channel.class);
@@ -121,6 +125,8 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
                 Log.i("FireInfo: ", "Added channel name: "+ c.channelName);
             }
 
+            //przy zmianie węzła usuwamy jego starą wersję i dodajemy nową
+            //porównanie jest po niezmiennej wartości - nazwie kanału
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Channel c = dataSnapshot.getValue(Channel.class);
@@ -130,6 +136,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
                 Log.i("FireInfo: ", "Changed channel name: "+ c.channelName);
             }
 
+            //przy usunięciu węzła usuwamy go z listy i odświeżamy widok
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Channel c = dataSnapshot.getValue(Channel.class);
@@ -138,6 +145,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
                 Log.i("FireInfo: ", "Removed channel name: "+ c.channelName);
             }
 
+            //przy przesunięciu węzła tzn zmianie kolejności po posortowaniu usuwamy węzeł i dodajemy na początku listy - najnowsza wiadomość
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
                 Channel c = dataSnapshot.getValue(Channel.class);
