@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.put.Chatterbox.Model.ChatBubble;
 import com.put.Chatterbox.Model.Message;
-import com.put.Chatterbox.Model.User;
 import com.put.Chatterbox.R;
 
 import java.util.ArrayList;
@@ -42,32 +41,29 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        userId = "xd2";
         chatBubbles = new ArrayList<>();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("MESSAGES");
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                    System.out.println(ds.toString());
-
-                    //chatBubbles.add(new ChatBubble((String) ds.child("content").getValue(), (String) ds.child("senderId").getValue()));
-                    ChatBubble chatBubble = new ChatBubble("fedec","1");
-                    chatBubbles.add(chatBubble);
-
-
-                    adapter.notifyDataSetChanged();
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//        databaseReference.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1");
+//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+//                    System.out.println(ds.toString());
+//
+//                    chatBubbles.add(new ChatBubble((String) ds.child("content").getValue(), (String) ds.child("senderId").getValue()));
+//
+//                    adapter.notifyDataSetChanged();
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
         /*FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -75,6 +71,10 @@ public class ChatActivity extends AppCompatActivity {
             String uid = user.getUid();
             userId = uid; // brak danych = crash
         }*/
+        for(int i=0;i<10;i++)
+        {
+            chatBubbles.add(new ChatBubble("Sample Text Message xD " + i,"xd"));
+        }
 
 
         listView = (ListView) findViewById(R.id.list_msg);
@@ -82,8 +82,6 @@ public class ChatActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.msg_type);
 
         //set ListView adapter first
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        final String userId = user.getUid();
         adapter = new ChatAdapter(this, R.layout.chat_layout_left, chatBubbles, userId);
         listView.setAdapter(adapter);
 
@@ -96,9 +94,11 @@ public class ChatActivity extends AppCompatActivity {
                 } else {
                     //add message to list
 
+                    chatBubbles.add(new ChatBubble(editText.getText().toString(),userId));
+                    adapter.notifyDataSetChanged();
                     // [??] Wysylanie wiadomosci do bazy
-                    writeNewMessage(userId, editText.getText().toString(), System.currentTimeMillis(),
-                            FirebaseDatabase.getInstance().getReference());
+//                    writeNewMessage(userId, editText.getText().toString(), System.currentTimeMillis(),
+//                            FirebaseDatabase.getInstance().getReference());
 
 
                     editText.setText("");
