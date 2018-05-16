@@ -2,12 +2,12 @@ package com.put.Chatterbox.Model;
 
 public class Message {
     private String content;
-    private String userId;
+    private String senderId;
     private long timestamp;
 
     public Message(String content, String userId, long timestamp) {
         this.content = content;
-        this.userId = userId;
+        this.senderId = userId;
         this.timestamp = timestamp;
     }
 
@@ -22,12 +22,12 @@ public class Message {
         this.content = content;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSenderId(String userId) {
+        this.senderId = userId;
     }
 
     public long getTimestamp() {

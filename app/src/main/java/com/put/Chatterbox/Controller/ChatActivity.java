@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,15 +45,52 @@ public class ChatActivity extends AppCompatActivity {
         //userId = "xd2";
         chatBubbles = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference channelReference = databaseReference.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1");
+
+       channelReference.orderByChild("timestamp").addChildEventListener(new ChildEventListener() {
+           @Override
+           public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+               ChatBubble chatBubble = dataSnapshot.getValue(ChatBubble.class);
+               chatBubbles.add(chatBubble);
+           }
+
+           @Override
+           public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+           }
+
+           @Override
+           public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+           }
+
+           @Override
+           public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+           }
+
+           @Override
+           public void onCancelled(DatabaseError databaseError) {
+
+           }
+       });
+
+
+        /*databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     System.out.println(ds.toString());
                     System.out.println(ds.child("content").getValue() + " " + (String) ds.child("senderId").getValue());
-                    chatBubbles.add(new ChatBubble((String) ds.child("content").getValue(), (String) ds.child("senderId").getValue()));
+
+                    Message message = ds.getValue(Message.class);
+
+
+                   // chatBubbles.add(new ChatBubble((String) ds.child("content").getValue(), (String) ds.child("senderId").getValue()));
 
                     
 
@@ -67,7 +105,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -75,11 +113,6 @@ public class ChatActivity extends AppCompatActivity {
             String uid = user.getUid();
             userId = uid; // brak danych = crash
         }
-        for(int i=0;i<10;i++)
-        {
-            chatBubbles.add(new ChatBubble("Sample Text Message xD " + i,"xd"));
-        }
-
 
         listView = (ListView) findViewById(R.id.list_msg);
         btnSend = findViewById(R.id.btn_chat_send);
@@ -112,11 +145,12 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    private static void writeNewMessage(String userId, String content, Long timestamp, DatabaseReference mDatabase) {
+    private static void writeNewMessage(String senderId, String content, Long timestamp, DatabaseReference mDatabase) {
 
-        Message message = new Message(content, userId, timestamp);
+        Message message = new Message(content, senderId, timestamp);
 
 
         mDatabase.child("ChannelMessages").child("768I1AsASmbCsa3aRBosXQaRjgZdf1").push().setValue(message);
     }
 }
+
