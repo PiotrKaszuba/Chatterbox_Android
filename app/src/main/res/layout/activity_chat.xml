@@ -41,7 +41,8 @@
             android:layout_marginTop="10dp"
             android:listSelector="@android:color/transparent"
             android:transcriptMode="alwaysScroll"
-            android:divider="@null" />
+            android:divider="@null"
+            android:dividerHeight="3.0sp" />
 
     </RelativeLayout>
 </LinearLayout>
