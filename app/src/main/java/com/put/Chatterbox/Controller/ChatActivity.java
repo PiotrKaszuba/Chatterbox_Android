@@ -43,7 +43,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         Intent intent = getIntent();
-        chatId = intent.getParcelableExtra("channelId");
+        chatId = intent.getStringExtra("channelId");
 
         chatBubbles = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -54,6 +54,7 @@ public class ChatActivity extends AppCompatActivity {
            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                ChatBubble chatBubble = dataSnapshot.getValue(ChatBubble.class);
                chatBubbles.add(chatBubble);
+               adapter.notifyDataSetChanged();
            }
 
            @Override
@@ -134,8 +135,8 @@ public class ChatActivity extends AppCompatActivity {
                 } else {
                     //add message to list
 
-                    chatBubbles.add(new ChatBubble(editText.getText().toString(),userId));
-                    adapter.notifyDataSetChanged();
+                    //chatBubbles.add(new ChatBubble(editText.getText().toString(),userId));
+                    //adapter.notifyDataSetChanged();
                     // [??] Wysylanie wiadomosci do bazy
                     writeNewMessage(userId, editText.getText().toString(), System.currentTimeMillis(),
                            FirebaseDatabase.getInstance().getReference());
