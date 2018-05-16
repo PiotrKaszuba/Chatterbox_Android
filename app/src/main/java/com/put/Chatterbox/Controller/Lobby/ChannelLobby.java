@@ -120,7 +120,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Channel c = dataSnapshot.getValue(Channel.class);
-
+                c.setId(dataSnapshot.getKey());
                 channelList.add(c);
                 refresh();
                 Log.i("FireInfo: ", "Added channel name: "+ c.channelName);
@@ -131,6 +131,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Channel c = dataSnapshot.getValue(Channel.class);
+                c.setId(dataSnapshot.getKey());
                 channelList.remove(c);
                 channelList.add(c);
                 refresh();
@@ -141,6 +142,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Channel c = dataSnapshot.getValue(Channel.class);
+                c.setId(dataSnapshot.getKey());
                 channelList.remove(c);
                 refresh();
                 Log.i("FireInfo: ", "Removed channel name: "+ c.channelName);
@@ -150,6 +152,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
                 Channel c = dataSnapshot.getValue(Channel.class);
+                c.setId(dataSnapshot.getKey());
                 channelList.remove(c);
                 channelList.add(0, c);
                 refresh();
