@@ -56,6 +56,7 @@ public class ChatAdapter extends ArrayAdapter<ChatBubble> {
 
         //set message content
         holder.messageTextView.setText(chatBubble.getContent());
+        holder.timeSent.setText(chatBubble.getTimestamp());
 
         return convertView;
     }
@@ -85,9 +86,11 @@ public class ChatAdapter extends ArrayAdapter<ChatBubble> {
 
     private class ViewHolder {
         private TextView messageTextView;
+        private TextView timeSent;
 
         public ViewHolder(View v) {
             messageTextView = (TextView) v.findViewById(R.id.txt_msg);
+            timeSent = (TextView) v.findViewById(R.id.time);
         }
     }
 }

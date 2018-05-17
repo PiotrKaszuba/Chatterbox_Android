@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.put.Chatterbox.Model.Channel;
+import com.put.Chatterbox.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,15 +55,19 @@ public class LobbyAdapter extends BaseAdapter {
         TextView dummyTextView = new TextView(mContext);
         Random r= new Random();
 
-        int randomColor = Color.rgb(r.nextInt(256),r.nextInt(255),r.nextInt(256));
-        dummyTextView.setBackgroundColor(randomColor);
+       // int randomColor = Color.rgb(r.nextInt(256),r.nextInt(255),r.nextInt(256));
+       // dummyTextView.setBackgroundColor(randomColor);
         //dummyTextView.setBackground();
+
+        dummyTextView.setBackgroundResource(R.drawable.chat);
 
         dummyTextView.setPadding(10,10,10,10);
         dummyTextView.setGravity(Gravity.CENTER);
 
+        dummyTextView.setTextColor(Color.WHITE);
+
         dummyTextView.setText(channels.get(position).channelName);
-        dummyTextView.setHeight(150);
+        dummyTextView.setHeight(200);
 
         return dummyTextView;
     }
