@@ -82,7 +82,6 @@ public class ChatActivity extends AppCompatActivity {
         /*databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -151,8 +150,6 @@ public class ChatActivity extends AppCompatActivity {
     private void writeNewMessage(String senderId, String content, Long timestamp, DatabaseReference mDatabase) {
 
         Message message = new Message(content, senderId, timestamp);
-
-
         mDatabase.child("ChannelMessages").child(chatId).push().setValue(message);
     }
 }
