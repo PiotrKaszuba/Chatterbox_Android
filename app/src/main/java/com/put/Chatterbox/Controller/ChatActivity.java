@@ -35,6 +35,7 @@ public class ChatActivity extends AppCompatActivity {
     private EditText editText;
     private  String userId;
     private String chatId;
+    private String chatType;
     private List<ChatBubble> chatBubbles;
     private ArrayAdapter<ChatBubble> adapter;
 
@@ -43,11 +44,13 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         Intent intent = getIntent();
-        chatId = intent.getStringExtra("channelId");
+
+        chatId = intent.getStringExtra("chatId");
+        chatType = intent.getStringExtra("chatType");
 
         chatBubbles = new ArrayList<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference channelReference = databaseReference.child("ChannelMessages").child(chatId);
+        DatabaseReference channelReference = databaseReference.child(chatType).child(chatId);
 
        channelReference.orderByChild("timestamp").addChildEventListener(new ChildEventListener() {
            @Override
@@ -153,7 +156,7 @@ public class ChatActivity extends AppCompatActivity {
         Message message = new Message(content, senderId, timestamp);
 
 
-        mDatabase.child("ChannelMessages").child(chatId).push().setValue(message);
+        mDatabase.child(chatType).child(chatId).push().setValue(message);
     }
 }
 

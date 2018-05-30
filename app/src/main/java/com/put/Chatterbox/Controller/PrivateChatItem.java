@@ -15,9 +15,9 @@ public class PrivateChatItem {
 
     private String chatId;
 
-    public PrivateChatItem(String name, String sender, String lastMessage, String chatId) {
+    public PrivateChatItem(String name, String lastMessageSender, String lastMessage, String chatId) {
         this.name = name;
-        this.sender = sender;
+        this.sender = lastMessageSender;
         this.lastMessage = lastMessage;
         this.chatId=chatId;
         this.hasAvatar = false;
