@@ -182,7 +182,8 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
         String chId = channelList.get(i).getId();
 
         Intent chatIntent = new Intent(this, ChatActivity.class);
-        chatIntent.putExtra("channelId", channelList.get(i).getId());
+        chatIntent.putExtra("chatId", channelList.get(i).getId());
+        chatIntent.putExtra("chatType","ChannelMessages");
         startActivity(chatIntent);
 
 
