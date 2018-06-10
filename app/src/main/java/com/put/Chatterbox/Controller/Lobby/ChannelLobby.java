@@ -15,11 +15,14 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.put.Chatterbox.Controller.ChatActivity;
 import com.put.Chatterbox.Controller.UserList;
 import com.put.Chatterbox.Model.Channel;
@@ -36,12 +39,17 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
     GridView kafelki;
     final ChannelLobby channelLobby;
     User user;
+    public List<String> privateChatsList = new ArrayList<String>();
+
+
     public ChannelLobby(){
         channelList = new ArrayList<>() ;
         channelLobby = this;
         
         adapter = new LobbyAdapter(this, channelList);
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +96,6 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
         });
         this.connectDatabase();
         this.loadView(adapter, kafelki);
-
-
 
     }
 

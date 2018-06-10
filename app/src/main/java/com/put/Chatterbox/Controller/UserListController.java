@@ -18,7 +18,9 @@ import com.put.Chatterbox.Model.User;
 import com.put.Chatterbox.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ServiceLoader;
 
 import static com.put.Chatterbox.Controller.MainActivity.sessionManager;
@@ -56,6 +58,47 @@ public class UserListController {
                 instance.updateUserList(usernamesArrayList);
             }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
+    }
+
+    public static void readFromDatabasePrivateChats(final UserList instance)
+    {
+
+        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference chatsRef = databaseReference.child("PrivateChats");
+        chatsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> privateChatsList = new ArrayList<String>();
+                Map<String,String> privateChatsMap = new HashMap<String,String>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    System.out.println( ds.toString());
+
+                    String uiddb1 = (String) ds.child("idUser1").getValue();
+                    String uiddb2 = (String) ds.child("idUser2").getValue();
+
+                    System.out.println("User1: " + uiddb1 + "     User2: " + uiddb2);
+
+                    if(userId.equals(uiddb1))
+                    {
+                        privateChatsList.add(uiddb2);
+                        privateChatsMap.put(uiddb2,ds.getKey());
+                    }
+                    if(userId.equals(uiddb2))
+                    {
+                        privateChatsList.add(uiddb1);
+                        privateChatsMap.put(uiddb1,ds.getKey());
+                    }
+                }
+
+                instance.openPrivateChat(privateChatsList,privateChatsMap,userId,instance.uidUser2);
+            }
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
