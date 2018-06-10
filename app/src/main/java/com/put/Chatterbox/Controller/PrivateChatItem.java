@@ -12,7 +12,6 @@ public class PrivateChatItem {
     private String sender;
     private String lastMessage;
 
-
     private String chatId;
 
     public PrivateChatItem(String name, String lastMessageSender, String lastMessage, String chatId) {
@@ -21,6 +20,9 @@ public class PrivateChatItem {
         this.lastMessage = lastMessage;
         this.chatId=chatId;
         this.hasAvatar = false;
+    }
+
+    public PrivateChatItem() {
     }
 
     public boolean HasAvatar() {

@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Piotr on 2018-03-15.
  */
@@ -16,6 +19,15 @@ public class User implements Parcelable {
     public String username;
     public String email;
     public Long timestamp;
+    public List<PrivateChannel> privateChannelList = new ArrayList<PrivateChannel>();
+
+    public List<PrivateChannel> getPrivateChannelList() {
+        return privateChannelList;
+    }
+
+    public void setPrivateChannelList(List<PrivateChannel> privateChannelList) {
+        this.privateChannelList = privateChannelList;
+    }
 
     public String getUsername() {
         return username;

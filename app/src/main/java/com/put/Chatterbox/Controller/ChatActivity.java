@@ -49,6 +49,9 @@ public class ChatActivity extends AppCompatActivity {
         chatType = intent.getStringExtra("chatType");
 
         chatBubbles = new ArrayList<>();
+
+
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference channelReference = databaseReference.child(chatType).child(chatId);
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Button signInButton;
     EditText emailEdit;
     EditText passwordEdit;
+    CheckBox remeberMeCheckBox;
+    public static SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +35,19 @@ public class MainActivity extends AppCompatActivity {
         signInButton = (Button) findViewById(R.id.logInButton);
         emailEdit = (EditText) findViewById(R.id.emailEdit);
         passwordEdit = (EditText) findViewById(R.id.passwordEdit);
+        remeberMeCheckBox = (CheckBox) findViewById(R.id.rememberMeCheckBox);
+
         ChatController.messageToWebserv("Hey, how are u 2day?");
-    }
+
+        System.out.println("REMEBER ME: " + remeberMeCheckBox.isChecked());
+
+        sessionManager = new SessionManager(getApplicationContext());
+        //sessionManager.logoutUser();
+        sessionManager.checkLogin();
+
+
+
+        }
 
     protected void signUp(View view)
     {
@@ -43,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
     protected void signIn(View view)
     {
-        MainActivityController.signIn(emailEdit.getText().toString(), passwordEdit.getText().toString(), this);
+
+        MainActivityController.signIn(emailEdit.getText().toString(), passwordEdit.getText().toString(), this,remeberMeCheckBox.isChecked());
 
         //
 

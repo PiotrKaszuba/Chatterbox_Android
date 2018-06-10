@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 
+import static com.put.Chatterbox.Controller.MainActivity.sessionManager;
+
 
 public class UserListController {
 

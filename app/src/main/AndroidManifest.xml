@@ -20,6 +20,7 @@
         <activity android:name=".Controller.UserList" />
         <activity android:name=".Controller.ChatActivity"/>
         <activity android:name=".Controller.Lobby.ChannelLobby"></activity>
+        <activity android:name=".Controller.PrivateChatActivity" />
     </application>
 
 </manifest>

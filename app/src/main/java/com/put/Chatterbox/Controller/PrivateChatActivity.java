@@ -68,7 +68,7 @@ public class PrivateChatActivity extends AppCompatActivity {
         }
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference channelReference = databaseReference.child("Users").child(userId);
+        DatabaseReference channelReference = databaseReference.child("PrivateChats");
 
         channelReference.orderByChild("lastMessageTimestamp").addChildEventListener(new ChildEventListener() {
             @Override

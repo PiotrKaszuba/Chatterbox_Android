@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
+import static com.put.Chatterbox.Controller.MainActivity.sessionManager;
 
 /**
  * Created by Piotr on 2018-03-21.
@@ -31,9 +32,10 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivityController {
 
+    static String username;
+    static Long timestamp;
 
-
-    public static void signIn(String email, String password, final MainActivity instance){
+    public static void signIn(final String email, String password, final MainActivity instance, final boolean rememberMe){
 
       // User user = new User();
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -51,8 +53,8 @@ public class MainActivityController {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String email = dataSnapshot.child("email").getValue(String.class);
-                        String username = dataSnapshot.child("username").getValue(String.class);
-                        Long timestamp = dataSnapshot.child("timestamp").getValue(Long.class);
+                         username = dataSnapshot.child("username").getValue(String.class);
+                         timestamp = dataSnapshot.child("timestamp").getValue(Long.class);
 
                         User user = new User(username,email,timestamp);
                         Intent myIntent = new Intent(instance, ChannelLobby.class);
@@ -85,6 +87,13 @@ public class MainActivityController {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            String name = user.getDisplayName();
+
+
+
+                            System.out.println("USERNAMEE!!! +  " + name);
+                            int a=0;
+                            if(rememberMe)sessionManager.createLoginSession(username, email,String.valueOf(timestamp));
 
                             final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid());
                             ref.addListenerForSingleValueEvent(postListener);
