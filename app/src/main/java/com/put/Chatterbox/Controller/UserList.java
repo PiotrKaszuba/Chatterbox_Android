@@ -15,8 +15,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.put.Chatterbox.Controller.Lobby.ChannelLobby;
 import com.put.Chatterbox.Model.PrivateChannel;
 import com.put.Chatterbox.Model.User;
@@ -36,7 +39,8 @@ public class UserList extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ArrayAdapter<TextView> textViewArrayAdapter;
     TextView logoutButton;
-    public String uidUser2;
+    public String usernameUser2;
+    String uidUser2;
     String uidUser1;
 
     @Override
@@ -111,12 +115,36 @@ public class UserList extends AppCompatActivity {
 
 
                 System.out.println(parent.getItemAtPosition(position));
-                uidUser2 =(String) parent.getItemAtPosition(position);
+                usernameUser2 =(String) parent.getItemAtPosition(position);
 
                 //get current user key
                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-
                 uidUser1=user.getUid();
+
+
+                //get user's key we want chat
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
+                ref.addListenerForSingleValueEvent(
+                        new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                                    //Get map of users in datasnapshot
+                                    User user = ds.getValue(User.class);
+                                    String nick = (String) ds.child("username").getValue();
+                                    int a = 0;
+                                    if (nick.equals(usernameUser2)) {
+                                        uidUser2 = ds.getKey();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                //handle databaseError
+                            }
+                        });
+
 
                 UserListController.readFromDatabasePrivateChats(ul);
 
@@ -134,8 +162,9 @@ public class UserList extends AppCompatActivity {
         String keyChatInDb ="";
 
         for (Map.Entry<String, String> entry : privateChatsmap.entrySet()) {
-            if(userId.equals(uid1) || userId.equals(uid1) && entry.getKey().equals(uid1) || entry.getKey().equals(uid2))
+            if((userId.equals(uid1) || userId.equals(uid1)) && (entry.getKey().equals(uid1) || entry.getKey().equals(uid2)))
             {
+                int a =0;
                 chatInDb = true;
                 keyChatInDb = entry.getValue();
             }
@@ -159,6 +188,7 @@ public class UserList extends AppCompatActivity {
         }
         else
         {
+            int a=0;
             Intent i = new Intent(this, ChatActivity.class);
             i.putExtra("chatId", keyChatInDb);
             i.putExtra("chatType", "ChannelMessages");

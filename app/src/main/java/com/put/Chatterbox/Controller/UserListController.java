@@ -83,6 +83,8 @@ public class UserListController {
                     String uiddb1 = (String) ds.child("idUser1").getValue();
                     String uiddb2 = (String) ds.child("idUser2").getValue();
 
+                    int a=0;
+
                     System.out.println("User1: " + uiddb1 + "     User2: " + uiddb2);
 
                     if(userId.equals(uiddb1))
@@ -96,7 +98,7 @@ public class UserListController {
                         privateChatsMap.put(uiddb1,ds.getKey());
                     }
                 }
-
+                    int b=0;
                 instance.openPrivateChat(privateChatsList,privateChatsMap,userId,instance.uidUser2);
             }
             @Override
