@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.put.Chatterbox.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     Button signUpButton;
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     EditText emailEdit;
     EditText passwordEdit;
     CheckBox remeberMeCheckBox;
+
+
     public static SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         sessionManager = new SessionManager(getApplicationContext());
         //sessionManager.logoutUser();
         sessionManager.checkLogin();
-
-
 
         }
 

@@ -50,7 +50,7 @@ public class ChatActivity extends AppCompatActivity {
 
         chatBubbles = new ArrayList<>();
 
-
+        if(chatType==null)chatType = "ChannelMessages";
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference channelReference = databaseReference.child(chatType).child(chatId);

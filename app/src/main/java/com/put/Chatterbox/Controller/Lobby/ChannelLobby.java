@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.put.Chatterbox.Controller.ChatActivity;
+import com.put.Chatterbox.Controller.PrivateChatActivity;
 import com.put.Chatterbox.Controller.UserList;
 import com.put.Chatterbox.Model.Channel;
 import com.put.Chatterbox.Model.User;
@@ -73,7 +74,7 @@ public class ChannelLobby extends AppCompatActivity implements Lobby {
                         instance.startActivity(myIntent);
                         break;
                     case R.id.menuPrivate:
-                        myIntent = new Intent(instance, UserList.class);
+                        myIntent = new Intent(instance, PrivateChatActivity.class);
                         myIntent.putExtra("user", user);
                         instance.startActivity(myIntent);
                         break;
