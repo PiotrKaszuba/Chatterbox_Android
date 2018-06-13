@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("REMEBER ME: " + remeberMeCheckBox.isChecked());
 
         sessionManager = new SessionManager(getApplicationContext());
-       // sessionManager.logoutUser();
+        //sessionManager.logoutUser();
         sessionManager.checkLogin();
 
         }

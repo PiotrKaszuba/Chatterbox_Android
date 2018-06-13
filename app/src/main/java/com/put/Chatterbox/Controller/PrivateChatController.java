@@ -253,9 +253,11 @@ public class PrivateChatController {
     public static void changeUserIdUsername(PrivateChatActivity instance) {
         Iterator<Map.Entry<String, String>> iter1 = userChatIdMap.entrySet().iterator();
         Iterator<Map.Entry<String, String>> iter2 = senderIdLastMessageMap.entrySet().iterator();
-        while (iter1.hasNext() || iter2.hasNext()) {
+        while (iter1.hasNext() && iter2.hasNext()) {
             Map.Entry<String, String> e1 = iter1.next();
             Map.Entry<String, String> e2 = iter2.next();
+
+            int a=0;
 
             for (Map.Entry<String, String> entry : userIdUsername.entrySet()) {
                 int b=0;
@@ -270,7 +272,6 @@ public class PrivateChatController {
                     senderIdLastMessageMap.put(entry.getValue(), senderIdLastMessageMap.get(e2.getKey()));
                     senderIdLastMessageMap.remove(e2.getKey());
                 }
-                int a=0;
             }
 
 

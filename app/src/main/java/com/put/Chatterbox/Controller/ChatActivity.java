@@ -11,7 +11,6 @@ import android.location.Location;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +49,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/mport okhttp3.Call;
+import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -276,12 +275,12 @@ public class ChatActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
         client.newCall(rq).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(okhttp3.Call call, IOException e) {
 
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(okhttp3.Call call, Response response) throws IOException {
                 adCat=response.body().string();
             }
         });

@@ -166,6 +166,7 @@ public class UserList extends AppCompatActivity {
         String keyChatInDb ="";
 
         for (Map.Entry<String, String> entry : privateChatsmap.entrySet()) {
+            int b=0;
             if((userId.equals(uid1) || userId.equals(uid2)) && (entry.getKey().equals(uid1) || entry.getKey().equals(uid2)))
             {
                 int a =0;
