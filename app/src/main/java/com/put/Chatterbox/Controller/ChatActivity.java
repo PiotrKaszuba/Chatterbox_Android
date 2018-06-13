@@ -81,7 +81,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         Intent intent = getIntent();
-
+        tempWords = new StringBuilder();
         counter=0;
          adLoader = new AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
         .forContentAd(new NativeContentAd.OnContentAdLoadedListener() {
@@ -249,7 +249,11 @@ public class ChatActivity extends AppCompatActivity {
                     editText.setText("");
                     counter++;
                     tempWords.append(temp+" ");
-                    if(counter >=9) getCategory(tempWords.toString());
+                    if(counter >=9) {
+                        getCategory(tempWords.toString());
+                        tempWords.setLength(0);
+                    }
+
                     if(counter >=10){
 
 
