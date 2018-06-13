@@ -21,7 +21,9 @@
             android:gravity="center"
             />
 
+
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/time"

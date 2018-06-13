@@ -122,7 +122,7 @@ public class chatsView extends AppCompatActivity {
             text.setTypeface(null, Typeface.BOLD);
             text.setBackgroundColor(Color.WHITE);
             text.setGravity(Gravity.CENTER);
-            text.setBackgroundResource(R.drawable.pobrane);
+            text.setBackgroundResource(R.drawable.dymek2);
 
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();

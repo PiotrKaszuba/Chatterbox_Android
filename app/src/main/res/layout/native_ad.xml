@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.gms.ads.formats.NativeContentAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/adView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentBottom="true"
+    ads:adSize="320x300"
+    ads:adUnitId="@string/ad_unit_id">
+
+
+    <TextView
+        android:id="@+id/ad_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/ad_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+
+
+</com.google.android.gms.ads.formats.NativeContentAdView>
