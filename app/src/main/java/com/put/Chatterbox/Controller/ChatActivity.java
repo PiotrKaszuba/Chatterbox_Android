@@ -262,14 +262,15 @@ public class ChatActivity extends AppCompatActivity {
                         adLoader.loadAds(new AdRequest.Builder()
                                 .addKeyword(adCat)
                                 .addTestDevice("52CFC76193B00F793EAD31B14D7EED9E").build(), 1);
+                        Toast.makeText(instance, "Ad request with keyword: " +adCat, Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(instance, "Ad request with keyword: " +adCat, Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
     }
     private void getCategory(String words){
-        StringBuilder sb = new StringBuilder("localhost:8080/AdKeywordsResolver/get?message=");
+        StringBuilder sb = new StringBuilder("http://192.168.43.164:8080/AdKeywordsResolver/get?message=");
         sb.append(words);
         Request rq = new Request.Builder().url(sb.toString()).build();
         OkHttpClient client = new OkHttpClient();
