@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.formats.NativeContentAdView;
 import com.put.Chatterbox.Model.ChatBubble;
+import com.put.Chatterbox.Model.ChatBubbleAd;
 import com.put.Chatterbox.R;
 
 import java.util.List;
@@ -37,7 +39,9 @@ public class ChatAdapter extends ArrayAdapter<ChatBubble> {
         int layoutResource = 0; // determined by view type
         ChatBubble chatBubble = getItem(position);
 
+        if(chatBubble instanceof ChatBubbleAd) return ((ChatBubbleAd) chatBubble).getAdView();
         int viewType = getItemViewType(position);
+
 
 
         if (!userId.equals(chatBubble.getSenderId())) {
