@@ -43,6 +43,7 @@ public class UserList extends AppCompatActivity {
     String uidUser2;
     String uidUser1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +60,10 @@ public class UserList extends AppCompatActivity {
             HashMap<String,String> u = sessionManager.getUserDetails();
             username = u.get("name");
             e = u.get("email");
-            String time = u.get("timestamp");
+            String time;
+            time = u.get("timestamp");
+            if(time==null) time="1";
+            int i=0;
             user = new User();
             user.setUsername(username);
             user.setEmail(e);
@@ -81,7 +85,7 @@ public class UserList extends AppCompatActivity {
                         break;
 
                     case R.id.menuPrivate:
-                        myIntent = new Intent(instance, UserList.class);
+                        myIntent = new Intent(instance, PrivateChatActivity.class);
                         myIntent.putExtra("user", user);
                         instance.startActivity(myIntent);
                         break;
@@ -162,7 +166,8 @@ public class UserList extends AppCompatActivity {
         String keyChatInDb ="";
 
         for (Map.Entry<String, String> entry : privateChatsmap.entrySet()) {
-            if((userId.equals(uid1) || userId.equals(uid1)) && (entry.getKey().equals(uid1) || entry.getKey().equals(uid2)))
+            int b=0;
+            if((userId.equals(uid1) || userId.equals(uid2)) && (entry.getKey().equals(uid1) || entry.getKey().equals(uid2)))
             {
                 int a =0;
                 chatInDb = true;

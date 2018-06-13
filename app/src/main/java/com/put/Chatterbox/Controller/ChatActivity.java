@@ -147,7 +147,7 @@ public class ChatActivity extends AppCompatActivity {
 
         chatBubbles = new ArrayList<>();
 
-
+        if(chatType==null)chatType = "ChannelMessages";
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference channelReference = databaseReference.child(chatType).child(chatId);
@@ -275,12 +275,12 @@ public class ChatActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
         client.newCall(rq).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(okhttp3.Call call, IOException e) {
 
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(okhttp3.Call call, Response response) throws IOException {
                 adCat=response.body().string();
             }
         });

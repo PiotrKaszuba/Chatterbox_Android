@@ -57,6 +57,11 @@ public class MainActivityController {
                          timestamp = dataSnapshot.child("timestamp").getValue(Long.class);
 
                         User user = new User(username,email,timestamp);
+
+                        username = user.username;
+                        timestamp = user.timestamp;
+                        int b=0;
+
                         Intent myIntent = new Intent(instance, ChannelLobby.class);
                         myIntent.putExtra("user", user);
                         instance.startActivity(myIntent);
@@ -94,7 +99,7 @@ public class MainActivityController {
                             System.out.println("USERNAMEE!!! +  " + name);
                             int a=0;
                             if(rememberMe)sessionManager.createLoginSession(username, email,String.valueOf(timestamp));
-
+                            int b=0;
                             final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid());
                             ref.addListenerForSingleValueEvent(postListener);
                             Toast.makeText(instance, "Log in successful.",

@@ -8,11 +8,10 @@ public class PrivateChatItem {
 
 
     private boolean hasAvatar;
-    private String name;
-    private String sender;
-    private String lastMessage;
-
-    private String chatId;
+    private String name; // z kim
+    private String sender; // kto last wyslal
+    private String lastMessage; // last message
+    private String chatId; // chat id
 
     public PrivateChatItem(String name, String lastMessageSender, String lastMessage, String chatId) {
         this.name = name;
@@ -23,6 +22,26 @@ public class PrivateChatItem {
     }
 
     public PrivateChatItem() {
+    }
+
+    public void setHasAvatar(boolean hasAvatar) {
+        this.hasAvatar = hasAvatar;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
+    }
+
+    public void setChatId(String chatId) {
+        this.chatId = chatId;
     }
 
     public boolean HasAvatar() {
