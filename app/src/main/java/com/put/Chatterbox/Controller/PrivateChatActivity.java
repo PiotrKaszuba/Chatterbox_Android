@@ -96,11 +96,11 @@ public class PrivateChatActivity extends AppCompatActivity {
             }
         });*/
 
-       // PrivateChatController.fillPrivateChatItem(this);
-        PrivateChatController.checkUserIdChatId(this);
-        PrivateChatController.checkSenderIdLastMessage(this);
-        PrivateChatController.checkUserIdUsername(this);
-        PrivateChatController.changeUserIdUsername(this);
+        PrivateChatController.privateChatsJoin(this);
+      //  PrivateChatController.checkUserIdChatId(this);
+       // PrivateChatController.checkSenderIdLastMessage(this);
+       // PrivateChatController.checkUserIdUsername(this);
+       // PrivateChatController.changeUserIdUsername(this);
 
 
     }

@@ -35,6 +35,8 @@ public class SessionManager {
 
     public static final String KEY_TIME = "timestamp";
 
+    public static final String KEY_UID = "uId";
+
     // Constructor
     public SessionManager(Context context){
         this._context = context;
@@ -42,7 +44,7 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void createLoginSession(String username, String email,String timestamp){
+    public void createLoginSession(String username, String email,String timestamp,String uid){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -54,6 +56,8 @@ public class SessionManager {
 
         // Storing timestamp in pref
         editor.putString(KEY_TIME,timestamp);
+
+        editor.putString(KEY_UID,uid);
 
         // commit changes
         editor.commit();
@@ -68,6 +72,8 @@ public class SessionManager {
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
 
         user.put(KEY_TIME, pref.getString(KEY_TIME, null));
+
+        user.put(KEY_UID,pref.getString(KEY_UID, null));
         // return user
         return user;
     }

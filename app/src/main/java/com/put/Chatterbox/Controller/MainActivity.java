@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         sessionManager = new SessionManager(getApplicationContext());
         //sessionManager.logoutUser();
         sessionManager.checkLogin();
-
+        int a=0;
         }
 
     protected void signUp(View view)

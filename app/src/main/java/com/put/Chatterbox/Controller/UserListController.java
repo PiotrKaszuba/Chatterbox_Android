@@ -51,6 +51,7 @@ public class UserListController {
 
                     String username = (String) ds.child("username").getValue();
                     System.out.println("username: " + username);
+                    int a=0;
                    if(!activeUser.equals(username)) usernamesArrayList.add(username);
                     System.out.println("arr size in for: " + usernamesArrayList.size());
                 }
@@ -68,7 +69,7 @@ public class UserListController {
     public static void readFromDatabasePrivateChats(final UserList instance)
     {
 
-        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
+        //final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         DatabaseReference chatsRef = databaseReference.child("PrivateChats");
@@ -87,19 +88,19 @@ public class UserListController {
 
                     System.out.println("User1: " + uiddb1 + "     User2: " + uiddb2);
 
-                    if(userId.equals(uiddb1))
+                    if(instance.uidUser1.equals(uiddb1))
                     {
                         privateChatsList.add(uiddb2);
                         privateChatsMap.put(uiddb2,ds.getKey());
                     }
-                    if(userId.equals(uiddb2))
+                    if(instance.uidUser1.equals(uiddb2))
                     {
                         privateChatsList.add(uiddb1);
                         privateChatsMap.put(uiddb1,ds.getKey());
                     }
                 }
                     int b=0;
-                instance.openPrivateChat(privateChatsList,privateChatsMap,userId,instance.uidUser2);
+                instance.openPrivateChat(privateChatsMap,instance.uidUser1,instance.uidUser2);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

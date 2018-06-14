@@ -34,6 +34,7 @@ public class MainActivityController {
 
     static String username;
     static Long timestamp;
+    static String remeberUsername;
 
     public static void signIn(final String email, String password, final MainActivity instance, final boolean rememberMe){
 
@@ -61,6 +62,13 @@ public class MainActivityController {
                         username = user.username;
                         timestamp = user.timestamp;
                         int b=0;
+
+                        if(rememberMe)
+                        {
+                            FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+                            final String uid = u.getUid();
+                            sessionManager.createLoginSession(user.username, email,String.valueOf(user.timestamp),uid);
+                        }
 
                         Intent myIntent = new Intent(instance, ChannelLobby.class);
                         myIntent.putExtra("user", user);
@@ -92,14 +100,7 @@ public class MainActivityController {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            String name = user.getDisplayName();
 
-
-
-                            System.out.println("USERNAMEE!!! +  " + name);
-                            int a=0;
-                            if(rememberMe)sessionManager.createLoginSession(username, email,String.valueOf(timestamp));
-                            int b=0;
                             final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(user.getUid());
                             ref.addListenerForSingleValueEvent(postListener);
                             Toast.makeText(instance, "Log in successful.",

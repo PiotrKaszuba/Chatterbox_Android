@@ -42,7 +42,7 @@ public class UserList extends AppCompatActivity {
     public String usernameUser2;
     String uidUser2;
     String uidUser1;
-
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +51,10 @@ public class UserList extends AppCompatActivity {
         logoutButton = (TextView) findViewById(R.id.logoutButton);
         Intent intent = getIntent();
         user = intent.getParcelableExtra("user");
-
+        int t=0;
         String username="";
         String e="";
-
+        String uid="";
         if(user==null)
         {
             HashMap<String,String> u = sessionManager.getUserDetails();
@@ -62,13 +62,17 @@ public class UserList extends AppCompatActivity {
             e = u.get("email");
             String time;
             time = u.get("timestamp");
-            if(time==null) time="1";
+            userId = u.get("uId");
+
+            if(time.equals("null")) time="1";
             int i=0;
             user = new User();
             user.setUsername(username);
             user.setEmail(e);
             user.setTimestamp(Long.valueOf(time));
         }
+
+        int q=0;
 
 
         BottomNavigationView bnv = this.findViewById(R.id.bottom_navigation);
@@ -157,9 +161,9 @@ public class UserList extends AppCompatActivity {
 
     }
 
-    public void openPrivateChat(ArrayList<String> privateChats,Map<String,String> privateChatsmap,String uid1,String uid2)
+    public void openPrivateChat(Map<String,String> privateChatsmap,String uid1,String uid2)
     {
-        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
+        //final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid() ;
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
         boolean chatInDb = false;
@@ -167,7 +171,7 @@ public class UserList extends AppCompatActivity {
 
         for (Map.Entry<String, String> entry : privateChatsmap.entrySet()) {
             int b=0;
-            if((userId.equals(uid1) || userId.equals(uid2)) && (entry.getKey().equals(uid1) || entry.getKey().equals(uid2)))
+            if((uidUser1.equals(uid1) || uidUser1.equals(uid2)) && (entry.getKey().equals(uid1) || entry.getKey().equals(uid2)))
             {
                 int a =0;
                 chatInDb = true;
@@ -178,6 +182,7 @@ public class UserList extends AppCompatActivity {
         if(!chatInDb) {
             PrivateChannel privateChannel = new PrivateChannel(uid1, uid2, System.currentTimeMillis());
 
+           // PrivateChatItem privateChatItem = new PrivateChatItem()
 
             String key = databaseReference.child("PrivateChats").push().getKey();
             databaseReference.child("PrivateChats").child(key).setValue(privateChannel);
@@ -197,7 +202,6 @@ public class UserList extends AppCompatActivity {
             Intent i = new Intent(this, ChatActivity.class);
             i.putExtra("chatId", keyChatInDb);
             i.putExtra("chatType", "ChannelMessages");
-            System.out.println("Start ChatActivity  onPostExecute");
             this.startActivity(i);
         }
     }

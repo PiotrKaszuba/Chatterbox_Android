@@ -89,7 +89,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onContentAdLoaded(NativeContentAd contentAd) {
 
                 NativeContentAdView adView = (NativeContentAdView) getLayoutInflater()
-                        .inflate(R.layout.native_ad_left, null);
+                        .inflate(R.layout.native_ad_layout_right, null);
 
                 TextView headlineView = adView.findViewById(R.id.txt_msg);
                 headlineView.setText(contentAd.getHeadline());
@@ -249,17 +249,17 @@ public class ChatActivity extends AppCompatActivity {
                     editText.setText("");
                     counter++;
                     tempWords.append(temp+" ");
-                    if(counter >=9) {
+                    if(counter >=1) {
                         getCategory(tempWords.toString());
                         tempWords.setLength(0);
                     }
 
-                    if(counter >=10){
+                    if(counter >=2){
 
 
                         counter=0;
                         adLoader.loadAds(new AdRequest.Builder()
-                                .addKeyword(adCat)
+                               .addKeyword(adCat)
                                 .addTestDevice("52CFC76193B00F793EAD31B14D7EED9E").build(), 1);
                         Toast.makeText(instance, "Ad request with keyword: " +adCat, Toast.LENGTH_SHORT).show();
                     }
